@@ -3,11 +3,11 @@ public class NordicBread extends DishDecorator {
 
     @Override
     public int getPrice() {
-        return wrappedDish.getPrice() + 7;
+        return super.getPrice() + 7;
     }
 
     @Override
     public String getName() {
-        return wrappedDish.getName() + " с нордской лепешкой";
+        return super.getName() + " с нордской лепешкой";
     }
 }

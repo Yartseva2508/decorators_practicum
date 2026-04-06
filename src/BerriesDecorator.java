@@ -3,11 +3,11 @@ public class BerriesDecorator extends DishDecorator {
 
     @Override
     public int getPrice() {
-        return wrappedDish.getPrice() + 5;
+        return super.getPrice() + 5;
     }
 
     @Override
     public String getName() {
-        return wrappedDish.getName() + " со снежными ягодами";
+        return super.getName() + " со снежными ягодами";
     }
 }

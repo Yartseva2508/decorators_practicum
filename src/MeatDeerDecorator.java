@@ -3,11 +3,11 @@ public class MeatDeerDecorator extends DishDecorator {
 
     @Override
     public int getPrice() {
-        return wrappedDish.getPrice() + 20;
+        return super.getPrice() + 20;
     }
 
     @Override
     public String getName() {
-        return wrappedDish.getName() + " с двойной олениной";
+        return super.getName() + " с двойной олениной";
     }
 }

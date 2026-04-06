@@ -4,6 +4,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 public class GUI {
     private static final int LIMIT = 3;
@@ -12,7 +13,7 @@ public class GUI {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Таверна: Меню (макс. 3)");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(350, 300);
+        frame.setSize(350, 350);
         frame.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 
         String[] options = {
@@ -21,6 +22,14 @@ public class GUI {
                 "Снежные ягоды (+5)",
                 "Нордская лепешка (+7)"
         };
+
+
+        List<Function<Dish, Dish>> constructors = List.of(
+                SauseDecorator::new,
+                MeatDeerDecorator::new,
+                BerriesDecorator::new,
+                NordicBread::new
+        );
 
         List<JCheckBox> boxes = new ArrayList<>();
 
@@ -38,12 +47,14 @@ public class GUI {
 
         JButton btnAdd = new JButton("Заказать");
         btnAdd.addActionListener(e -> {
+
             Dish finalOrder = new BaseDish();
 
-            if (boxes.get(0).isSelected()) finalOrder = new SauseDecorator(finalOrder);
-            if (boxes.get(1).isSelected()) finalOrder = new MeatDeerDecorator(finalOrder);
-            if (boxes.get(2).isSelected()) finalOrder = new BerriesDecorator(finalOrder);
-            if (boxes.get(3).isSelected()) finalOrder = new NordicBread(finalOrder);
+            for (int i = 0; i < boxes.size(); i++) {
+                if (boxes.get(i).isSelected()) {
+                    finalOrder = constructors.get(i).apply(finalOrder);
+                }
+            }
 
             String time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
             String info = finalOrder.getName() + " | Цена: " + finalOrder.getPrice() + " септимов";
