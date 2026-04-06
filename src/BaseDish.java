@@ -1,4 +1,5 @@
 public class BaseDish implements Dish {
+
     @Override
     public int getPrice() {
         return 50;

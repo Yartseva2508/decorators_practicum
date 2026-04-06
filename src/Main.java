@@ -5,7 +5,8 @@ public class Main {
         SwingUtilities.invokeLater(() -> {
             try {
                 GUI.main(args);
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 e.printStackTrace();
             }
         });

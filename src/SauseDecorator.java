@@ -5,6 +5,7 @@ public class SauseDecorator extends DishDecorator {
     public int getPrice() {
         return wrappedDish.getPrice() + 10;
     }
+
     @Override
     public String getName() {
         return wrappedDish.getName() + " с огненным соусом";
